@@ -59,14 +59,47 @@ RSpec.describe Poker do
       let(:hand) { [
         ['10', 'S'],
         ['J', 'S'],
-        ['9', 'S'],
+        ['8', 'S'],
         ['K', 'S'],
         ['Q', 'S']
       ] }
 
-      it "is a straight royal flush" do
-
+      it "is a straight flush" do
+        expect(Poker.straight_flush?(hand)).to be true
       end
     end
+  end
+
+  describe "helper functions" do
+    context "pictures to nums" do
+        let(:hand) { [
+          ['10', 'S'],
+          ['J', 'S'],
+          ['9', 'S'],
+          ['K', 'S'],
+          ['Q', 'S']
+        ] }
+        let(:hand2) { [
+          ['A', 'S'],
+          ['2', 'S'],
+          ['3', 'S'],
+          ['4', 'S'],
+          ['5', 'S']
+        ] }
+        let(:result) {
+          [9, 10, 11, 12, 13]
+        }  
+        let(:result2) {
+          [1, 2, 3, 4, 5]
+        } 
+
+        it "can turn a hand into numbers" do
+          expect(Poker.picturesToNums(hand)).to eq(result)
+        end
+
+        it "can handle a low ace" do
+          expect(Poker.picturesToNums(hand2)).to eq(result2)
+        end
+      end
   end
 end
